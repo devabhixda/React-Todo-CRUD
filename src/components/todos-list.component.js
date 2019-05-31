@@ -5,6 +5,9 @@ import axios from 'axios';
 const Todo = props => (
     <tr>
         <td className={props.todo.todo_description}>{props.todo.todo_description}</td>
+        <td>
+            <Link to={"/edit/"+props.todo.task_id}>Edit </Link>
+        </td>
     </tr>
 )
 
