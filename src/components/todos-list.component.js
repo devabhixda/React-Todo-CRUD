@@ -7,6 +7,8 @@ const Todo = props => (
         <td className={props.todo.todo_description}>{props.todo.todo_description}</td>
         <td>
             <Link to={"/edit/"+props.todo.task_id}>Edit </Link>
+            |
+            <Link to={"/delete/"+props.todo.task_id}> Delete</Link>
         </td>
     </tr>
 )
