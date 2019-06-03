@@ -20,12 +20,8 @@ if (confirmation) {
 render(){
 return (
         <div>
-            <form onSubmit={this.onSubmit}>
-                  <div>
-                  <br/>
-                       <input type="submit" value="Delete Todo" className="btn btn-primary" />
-                  </div>
-            </form>
+        <h3>Delete Todo</h3>
+             <button type="submit" className="btn btn-primary" onClick={this.onSubmit}>Delete</button>
         </div>
         )
 };

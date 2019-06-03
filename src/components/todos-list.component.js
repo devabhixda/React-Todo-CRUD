@@ -54,7 +54,7 @@ TodosList.propTypes={
 }
 
 function mapStateToProps(state) {
-  return { todo: state.tasks.items };
+  return { todo: state.tasks.tasks };
 };
 
 export default connect(mapStateToProps, {listTask})(TodosList);
