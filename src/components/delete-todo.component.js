@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
-import axios from 'axios';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {deleteTask} from '../actions/postActions.js';
 class DeleteTodo extends Component {
 constructor(props){
         super(props);
@@ -9,7 +11,8 @@ constructor(props){
 onSubmit(e){
 var confirmation = window.confirm("Are you sure you want to delete?");
 if (confirmation) {
-  axios.delete('http://localhost:8080/tasks/'+this.props.match.params.id);
+  const task_id=this.props.match.params.id;
+  this.props.deleteTask(task_id);
   this.props.history.push('/');
 }
 };
@@ -27,4 +30,7 @@ return (
         )
 };
 }
-export default DeleteTodo;
+DeleteTodo.propRypes={
+  deleteTask: PropTypes.func.isRequired
+}
+export default connect(null, {deleteTask})(DeleteTodo);

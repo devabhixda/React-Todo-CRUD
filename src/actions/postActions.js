@@ -1,5 +1,4 @@
-import {ADD_TASK} from './types.js';
-import {EDIT_TASK} from './types.js'
+import {ADD_TASK, EDIT_TASK, DELETE_TASK} from './types.js';
 import axios from 'axios';
 export const addTask = newTodo => dispatch => {
 axios.post('http://localhost:8080/tasks', newTodo)
@@ -18,4 +17,12 @@ dispatch({
   payload: obj
 })
 )
-};
+}
+export const deleteTask = task_id => dispatch =>{
+axios.delete('http://localhost:8080/tasks/'+task_id)
+.then((res)=>
+dispatch({
+  type: DELETE_TASK
+})
+)
+}
