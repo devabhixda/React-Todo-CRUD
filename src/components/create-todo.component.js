@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
-import axios from 'axios';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {addTask} from '../actions/postActions.js';
 
 class CreateTodo extends Component {
     constructor(props) {
@@ -22,15 +24,9 @@ class CreateTodo extends Component {
         const newTodo = {
             todo_description: this.state.todo_description
         }
-
-        axios.post('http://localhost:8080/tasks', newTodo)
-        .then((res)=>{
-          this.setState({
-            todo_description: ''
-        })
-      })
+        this.props.addTask(newTodo);
         this.props.history.push('/');
-    }
+        }
 
     render() {
         return (
@@ -53,5 +49,7 @@ class CreateTodo extends Component {
         )
     }
 }
-
-export default CreateTodo;
+CreateTodo.propRypes={
+  addTask: PropTypes.func.isRequired
+}
+export default connect(null, {addTask})(CreateTodo);
