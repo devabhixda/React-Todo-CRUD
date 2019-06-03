@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {editTask} from '../actions/postActions.js';
 class EditTodo extends Component {
     constructor(props) {
         super(props);
@@ -34,7 +37,8 @@ class EditTodo extends Component {
         const obj = {
             todo_description: this.state.todo_description
         };
-        axios.put('http://localhost:8080/tasks/'+this.props.match.params.id, obj)
+        const task_id=this.props.match.params.id;
+        this.props.editTask(obj,task_id);
         this.props.history.push('/');
     }
 
@@ -60,4 +64,7 @@ class EditTodo extends Component {
         )
     }
 };
-export default EditTodo;
+EditTodo.propRypes={
+  editTask: PropTypes.func.isRequired
+}
+export default connect(null, {editTask})(EditTodo);

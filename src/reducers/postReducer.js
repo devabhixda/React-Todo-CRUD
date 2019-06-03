@@ -1,4 +1,4 @@
-import {ADD_TASK} from '../actions/types.js';
+import {ADD_TASK, EDIT_TASK} from '../actions/types.js';
 const initialState={
   items: [],
   item: {}
@@ -6,6 +6,11 @@ const initialState={
 export default function(state=initialState, action){
   switch(action.type){
     case ADD_TASK:
+    return{
+      ...state,
+      items: action.payload
+    }
+    case EDIT_TASK:
     return{
       ...state,
       items: action.payload
