@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+import {Provider} from 'react-redux';
+import store from './store.js';
 import CreateTodo from "./components/create-todo.component";
 import EditTodo from "./components/edit-todo.component";
 import DeleteTodo from "./components/delete-todo.component"
@@ -10,6 +12,7 @@ import TodosList from "./components/todos-list.component";
 class App extends Component {
   render() {
     return (
+      <Provider store={store}>
       <Router>
         <div className="container">
 
@@ -33,6 +36,7 @@ class App extends Component {
           <Route path="/delete/:id" component={DeleteTodo} />
         </div>
       </Router>
+      </Provider>
     );
   }
 }
