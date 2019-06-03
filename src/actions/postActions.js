@@ -1,4 +1,4 @@
-import {ADD_TASK, EDIT_TASK, DELETE_TASK} from './types.js';
+import {ADD_TASK, EDIT_TASK, DELETE_TASK, LIST_TASK} from './types.js';
 import axios from 'axios';
 export const addTask = newTodo => dispatch => {
 axios.post('http://localhost:8080/tasks', newTodo)
@@ -23,6 +23,15 @@ axios.delete('http://localhost:8080/tasks/'+task_id)
 .then((res)=>
 dispatch({
   type: DELETE_TASK
+})
+)
+}
+export const listTask = () => dispatch =>{
+axios.get('http://localhost:8080/tasks/')
+.then((res)=>
+dispatch({
+  type: LIST_TASK,
+  payload: res.data
 })
 )
 }

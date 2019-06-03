@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {listTask} from '../actions/postActions.js';
 
 const Todo = props => (
     <tr>
@@ -14,38 +16,19 @@ const Todo = props => (
 )
 
 class TodosList extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {todos: []};
-    }
 
-    componentDidMount() {
-        axios.get('http://localhost:8080/tasks/')
-            .then(response => {
-                this.setState({todos: response.data});
-            })
-            .catch(function (error) {
-                console.log(error);
-            })
-    }
+  componentWillMount() {
+  this.props.listTask();
+}
 
-    componentDidUpdate(prevState) {
-      if (prevState.todo!==this.state.todo) {
-        axios.get('http://localhost:8080/tasks/')
-        .then(response => {
-            this.setState({todos: response.data});
-        })
-        .catch(function (error) {
-            console.log(error);
-        })
-    }
+  componentDidUpdate(){
+    this.props.listTask();
   }
-
-    todoList() {
-        return this.state.todos.map(function(currentTodo, i) {
+  todoList() {
+        return this.props.todo.map(function(currentTodo, i) {
             return <Todo todo={currentTodo} key={i} />;
-        });
-    }
+   });
+}
 
     render() {
         return (
@@ -65,4 +48,13 @@ class TodosList extends Component {
         )
     }
 };
-export default TodosList;
+TodosList.propTypes={
+  listTask: PropTypes.func.isRequired,
+  todo: PropTypes.array.isRequired
+}
+
+function mapStateToProps(state) {
+  return { todo: state.tasks.items };
+};
+
+export default connect(mapStateToProps, {listTask})(TodosList);
